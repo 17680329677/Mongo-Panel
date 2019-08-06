@@ -1,0 +1,41 @@
+plugins {
+	id 'org.springframework.boot' version '2.2.0.M3'
+	id 'java'
+}
+
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'io.spring.dependency-management'
+
+group = 'com.aispeech'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+
+repositories {
+	mavenCentral()
+	maven { url 'https://repo.spring.io/snapshot' }
+	maven { url 'https://repo.spring.io/milestone' }
+	maven { url = "http://artifactory.spetechcular.com/artifactory/libs-release" }
+	maven { url = "http://artifactory.spetechcular.com/artifactory/libs-snapshot" }
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'com.aisp:horizontal:1.9.48.0'
+	testImplementation('org.springframework.boot:spring-boot-starter-test') {
+		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+		exclude group: 'junit', module: 'junit'
+	}
+	implementation('com.alibaba:fastjson:1.2.54')
+	annotationProcessor('org.projectlombok:lombok:1.18.4')
+	compileOnly('org.projectlombok:lombok:1.18.4')
+	compile group: 'org.mongodb', name: 'mongodb-driver-async', version:'3.8.2'
+	compile group: 'org.mongodb', name: 'mongodb-driver-core', version:'3.8.2'
+	compile group: 'org.mongodb', name: 'bson', version:'3.8.2'
+	compile group: 'commons-collections', name: 'commons-collections', version:'3.1'
+	runtimeOnly group: 'org.springframework.boot', name: 'spring-boot-devtools'
+}
+
+test {
+	useJUnitPlatform()
+}
